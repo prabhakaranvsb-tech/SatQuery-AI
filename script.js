@@ -947,11 +947,10 @@ analyzeButton.addEventListener(
         // -----------------------
 
         try {
-
             const response =
                 await fetch(
 
-                    "http://127.0.0.1:8000/analyze",
+                    "https://satquery-ai-n3de.onrender.com/analyze",
 
                     {
 
@@ -1299,8 +1298,7 @@ console.log(
     "Current Analysis Mode:",
     currentMode
 );
-
 console.log(
     "Backend Endpoint:",
-    "http://127.0.0.1:8000/analyze"
+    "https://satquery-ai-n3de.onrender.com/analyze"
 );
