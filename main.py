@@ -236,53 +236,57 @@ async def analyze(
             result
         )
 
-# =================================
-# TASK SELECTION
-# =================================
+    # =================================
+    # TASK SELECTION
+    # =================================
 
-query_lower = query.lower()
+    query_lower = query.lower()
 
-if mode == "single":
+    if mode == "single":
 
-    if any(word in query_lower for word in [
-        "describe",
-        "description",
-        "what is visible",
-        "what can you see",
-        "scene",
-        "identify"
-    ]):
 
-        task = "Remote-Sensing Scene Description"
 
-        model = "Remote-Sensing Vision Specialist"
+
+
+        if any(word in query_lower for word in [
+            "describe",
+            "description",
+            "what is visible",
+            "what can you see",
+            "scene",
+            "identify"
+        ]):
+
+
+
+            
+
+            task = "Remote-Sensing Scene Description"
+            model = "Remote-Sensing Vision Specialist"
+
+        else:
+
+            task = "Remote-Sensing Image Analysis"
+            model = "Remote-Sensing Vision Specialist"
+
+    elif mode == "cross":
+
+        task = "Optical-SAR Cross-Modal Analysis"
+        model = "Optical-SAR Fusion Specialist"
+
+    elif mode == "change":
+
+        task = "Multi-Temporal Change Analysis"
+        model = "Change Detection Specialist"
 
     else:
 
-        task = "Remote-Sensing Image Analysis"
-
-        model = "Remote-Sensing Vision Specialist"
-
-
-elif mode == "cross":
-
-    task = "Optical-SAR Cross-Modal Analysis"
-
-    model = "Optical-SAR Fusion Specialist"
+        task = "Remote-Sensing Analysis"
+        model = "SatQuery AI Specialist"
 
 
-elif mode == "change":
 
-    task = "Multi-Temporal Change Analysis"
-
-    model = "Change Detection Specialist"
-
-
-else:
-
-    task = "Remote-Sensing Analysis"
-
-    model = "SatQuery AI Specialist"
+        
 
 
     # =================================
@@ -292,7 +296,6 @@ else:
     if image_results:
 
         first_result = image_results[0]
-
 
         if "error" in first_result:
 
@@ -304,22 +307,16 @@ else:
         else:
 
             response_text = (
-
                 f"SatQuery AI analyzed the uploaded "
                 f"satellite image. The image resolution "
                 f"is {first_result['width']} × "
                 f"{first_result['height']} pixels. "
-
                 f"{first_result['land_cover']} "
-
                 f"Estimated vegetation-like area: "
                 f"{first_result['vegetation_percentage']}%. "
-
                 f"Estimated water-like area: "
                 f"{first_result['water_like_percentage']}%."
-
             )
-
 
     else:
 
@@ -335,15 +332,11 @@ else:
     if image_results:
 
         evidence_text = (
-
             "Image evidence generated successfully. "
-
             f"Processed {len(image_results)} "
-            f"satellite image(s). "
-
+            "satellite image(s). "
             "Pixel-level visual statistics were "
             "used to generate the initial evidence."
-
         )
 
     else:
