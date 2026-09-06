@@ -235,7 +235,6 @@ async def analyze(
         image_results.append(
             result
         )
-
     # =================================
     # TASK SELECTION
     # =================================
@@ -243,10 +242,6 @@ async def analyze(
     query_lower = query.lower()
 
     if mode == "single":
-
-
-
-
 
         if any(word in query_lower for word in [
             "describe",
@@ -256,10 +251,6 @@ async def analyze(
             "scene",
             "identify"
         ]):
-
-
-
-            
 
             task = "Remote-Sensing Scene Description"
             model = "Remote-Sensing Vision Specialist"
@@ -285,10 +276,6 @@ async def analyze(
         model = "SatQuery AI Specialist"
 
 
-
-        
-
-
     # =================================
     # CREATE RESPONSE
     # =================================
@@ -311,9 +298,12 @@ async def analyze(
                 f"satellite image. The image resolution "
                 f"is {first_result['width']} × "
                 f"{first_result['height']} pixels. "
+
                 f"{first_result['land_cover']} "
+
                 f"Estimated vegetation-like area: "
                 f"{first_result['vegetation_percentage']}%. "
+
                 f"Estimated water-like area: "
                 f"{first_result['water_like_percentage']}%."
             )
@@ -334,7 +324,7 @@ async def analyze(
         evidence_text = (
             "Image evidence generated successfully. "
             f"Processed {len(image_results)} "
-            "satellite image(s). "
+            f"satellite image(s). "
             "Pixel-level visual statistics were "
             "used to generate the initial evidence."
         )
@@ -373,3 +363,4 @@ async def analyze(
         "image_analysis": image_results
 
     }
+    
